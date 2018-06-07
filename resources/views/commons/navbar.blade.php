@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Tasklist</a>
+                <a class="navbar-brand" href="/">Tasks</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -21,15 +21,15 @@
                                 <li><a href="#">My profile</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li>{!! link_to_route('logout.get', 'Logout') !!}</li>
+                                <li>{!! link_to_route('tasks.create', '新規メッセージの投稿') !!}</li>
                             </ul>
                         </li>
                     @else
                         <li>{!! link_to_route('signup.get', 'Signup') !!}</li>
                         <li>{!! link_to_route('login', 'Login') !!}</li>
                     @endif
-                    <li>{!! link_to_route('signup.get', 'Signup') !!}</li>
-                    <li><a href="#">Login</a></li>
-                    <li>{!! link_to_route('task.create', '新規メッセージの投稿') !!}</li>
+                  
+                    
                 </ul>
             </div>
         </div>

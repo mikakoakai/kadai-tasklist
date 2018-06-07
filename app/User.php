@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function kadaitasklist()
     {
-        return $this->hasMany(Micropost::class);
+        return $this->hasMany(tasks::class);
     }
 }

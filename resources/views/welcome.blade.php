@@ -64,63 +64,12 @@
             }
         </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-@extends('layouts.app')
+    @extends('layouts.app')
 
 @section('content')
-@if (Auth::check())
-        <div class="row">
-            <aside class="col-md-4">
-            </aside>
-            <div class="col-xs-8">
-                @if (count($microposts) > 0)
-                    @include('microposts.microposts', ['microposts' => $microposts])
-                @endif
-            </div>
-        </div>
-    @else
-        <?php $user = Auth::user(); ?>
-        {{ $user->name }}
-    @else
-        <div class="center jumbotron">
-            <div class="text-center">
-                <h1>Welcome to the Microposts</h1>
-                {!! link_to_route('signup.get', 'Sign up now!', null, ['class' => 'btn btn-lg btn-primary']) !!}
-            </div>
-        </div>
-    @endif
     <div class="center jumbotron">
         <div class="text-center">
-            <h1>Welcome to the kadai-tasklist</h1>
-            {!! link_to_route('signup.get', 'Sign up now!', null, ['class' => 'btn btn-lg btn-primary']) !!}
+            <h1>Welcome to the Tasks</h1>
         </div>
     </div>
 @endsection

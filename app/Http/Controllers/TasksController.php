@@ -18,10 +18,15 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = Task::all();
+        if(\Auth::check()){
 
         return view('tasks.index', [
             'tasks' => $tasks,
             ]);
+    } else {
+            //return redirect('/login');
+            return view('welcome');
+    }
     }
 
     /**
@@ -32,10 +37,13 @@ class TasksController extends Controller
     public function create()
     {
         $task = new Task;
-
-        return view('tasks.create', [
-            'task' => $task,
-        ]);
+        if(\Auth::check()){
+            return view('tasks.create', [
+                'task' => $task,
+            ]);
+        } else {
+            return redirect('/login');
+        }
     }
 
     /**

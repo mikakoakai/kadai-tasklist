@@ -11,11 +11,11 @@ class MicropostsController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $microposts = $user->microposts()->orderBy('created_at', 'desc')->paginate(10);
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
-                'microposts' => $microposts,
+                'tasks' => $tasks,
             ];
             $data += $this->counts($user);
             return view('users.show', $data);
@@ -30,10 +30,21 @@ class MicropostsController extends Controller
             'content' => 'required|max:191',
         ]);
 
-        $request->user()->microposts()->create([
+        $request->user()->tasks()->create([
             'content' => $request->content,
         ]);
 
         return redirect('/');
+    }
+
+     public function destroy($id)
+    {
+        $tasks = \App\Micropost::find($id);
+
+        if (\Auth::user()->id === $tasks->user_id) {
+            $tasks->delete();
+        }
+
+        return redirect()->back();
     }
 }
