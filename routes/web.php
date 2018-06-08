@@ -33,6 +33,6 @@ Route::get('/', 'TasksController@index');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    Route::resource('tasks', 'TasksController', ['only' => ['store', 'destroy', 'show','create','edit','update']]);
+    Route::resource('tasks', 'TasksController');
 });
 
