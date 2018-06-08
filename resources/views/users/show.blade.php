@@ -14,9 +14,9 @@
         </aside>
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_tasks }}</span></a></li>
-                <li><a href="#">Followings</a></li>
-                <li><a href="#">Followers</a></li>
+                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">Tasks TimeLine <span class="badge">{{ $count_tasks }}</span></a></li>
+                <!--li><a href="#">Followings</a></li>
+                <li><a href="#">Followers</a></li-->
             </ul>
             @if (Auth::user()->id == $user->id)
                   {!! Form::open(['route' => 'tasks.store']) !!}
@@ -28,8 +28,20 @@
                       </div>
                   {!! Form::close() !!}
             @endif
-            @if (count($tasks) > 0)
-                @include('tasks.show', ['tasks' => $tasks])
+
+            @if (Auth::user()->id == $user->id)
+                @if (count($tasks) > 0)
+                <table>
+                @foreach ($tasks as $task)
+                <tr>
+                   <td>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!}</td>
+                   <td>{{$task->status}} </td>
+                   <td>{{ $task->content }}</td>
+                </tr>
+                @endforeach
+                </table>
+                @endif
+
             @endif
         </div>
     </div>

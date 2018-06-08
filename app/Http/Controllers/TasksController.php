@@ -87,9 +87,10 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        if(\Auth::check())
-        {
         $task = Task::find($id);
+        if(\Auth::check() && $task != null )
+        {
+
         $user = \Auth::user();
         $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
         
@@ -117,14 +118,14 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        if(\Auth::check())
-        {
         $task = Task::find($id);
+        if(\Auth::check() && $task != null)
+        {
         $user = \Auth::user();
         $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
         
-        if (\Auth::user()->id === $tasks->user_id) {
-        return view('tasks.show', [
+        if (\Auth::user()->id === $task->user_id) {
+        return view('tasks.edit', [
             'tasks' => $tasks,
             'task' => $task,
             'user' => $user,
@@ -155,7 +156,8 @@ class TasksController extends Controller
 
 
         $task = Task::find($id);
-        $task->title = $request->status;    
+        $task->title = $request->status;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
